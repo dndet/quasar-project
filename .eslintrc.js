@@ -45,7 +45,10 @@ module.exports = {
     __statics: 'readonly',
     process: 'readonly',
     Capacitor: 'readonly',
-    chrome: 'readonly'
+    chrome: 'readonly',
+    createUnityInstance: 'readonly',
+    ARCamera: 'readonly',
+    WorldTracker: 'readonly'
   },
 
   // add your custom rules here
