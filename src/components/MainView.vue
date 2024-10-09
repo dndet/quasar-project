@@ -26,12 +26,25 @@
               <q-btn icon="close" flat round dense @click="toggleWebGL" />
             </div>
             <div class="webgl-container">
-              <WebGLView />
+              <WebGLView :selectedCamera = 'model' />
             </div>
           </q-card-section>
         </q-card>
       </q-dialog>
     </div>
+    <div class="q-pa-md">
+    <div class="q-gutter-md row">
+      <q-select
+        label="Cameras"
+        transition-show="scale"
+        transition-hide="scale"
+        filled
+        v-model="model"
+        :options="options"
+        style="width: 250px"
+      ></q-select>
+    </div>
+  </div>
   </div>
 </template>
 
@@ -52,13 +65,27 @@ export default {
   },
   data () {
     return {
-      showWebGL: false
+      showWebGL: false,
+      model: null,
+      options: []
     }
   },
   methods: {
     toggleWebGL () {
+      if (!this.selectedCamera) return
       this.showWebGL = !this.showWebGL
+    },
+    async getCameras () {
+      const devices = await navigator.mediaDevices.enumerateDevices()
+      return devices.filter(device => device.kind === 'videoinput')
     }
+  },
+  async mounted () {
+    const videoDevices = await this.getCameras()
+    this.options = videoDevices.map(device => ({
+      label: device.label || `Camera ${this.options.length + 1}`,
+      value: device.deviceId
+    }))
   }
 }
 </script>

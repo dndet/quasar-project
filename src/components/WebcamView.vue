@@ -12,6 +12,7 @@ export default {
       stream: null
     }
   },
+  props: ['selected-Camera'],
   mounted () {
     this.startWebcam()
   },

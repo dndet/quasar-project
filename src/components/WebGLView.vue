@@ -1,6 +1,7 @@
 <template>
   <div class="webgl-container">
     <iframe
+      ref="myIframe"
       id="unity-iframe"
       src="/webgl/index.html"
       style="border:0; width:100%; height:100vh;"
@@ -24,6 +25,7 @@
 import io from 'socket.io-client'
 export default {
   name: 'WebGLView',
+  props: ['selectedCamera'],
   data () {
     return {
       unityPeerConnection: null,
@@ -32,6 +34,9 @@ export default {
     }
   },
   mounted () {
+    if (!this.selectedCamera) {
+      this.$router.push('*')
+    }
     this.socket = io('https://webrtcsvsocket.onrender.com', {
       withCredentials: true,
       reconnection: true
@@ -43,6 +48,10 @@ export default {
       console.log('Disconnected from signaling server')
     })
     this.initWebRTC()
+
+    window.cameraData = { label: this.selectedCamera.label, value: this.selectedCamera.value }
+    localStorage.setItem('slectedCamera', JSON.stringify(window.cameraData))
+    console.log(window.cameraData)
   },
   methods: {
     initWebRTC () {
