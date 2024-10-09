@@ -72,7 +72,7 @@ export default {
   },
   methods: {
     toggleWebGL () {
-      if (!this.selectedCamera) return
+      if (!this.model) return
       this.showWebGL = !this.showWebGL
     },
     async getCameras () {
