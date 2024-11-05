@@ -73,5 +73,22 @@ export default {
       essentialLinks: linksData
     }
   }
+  // methods: {
+  //   checkOrientation () {
+  //     if (this.isIOS() || this.isAndroidDevice()) {
+  //       if (screen.orientation.type === 'portrait-primary' || screen.orientation.type === 'portrait-secondary') {
+  //         document.querySelector('#q-app').style.transform = 'rotate(90deg)'
+  //       } else {
+  //         document.body.style.transform = ''
+  //       }
+  //     }
+  //   }
+  // },
+  // mounted () {
+  //   this.checkOrientation()
+  //   screen.orientation.addEventListener('change', () => {
+  //     this.checkOrientation()
+  //   })
+  // }
 }
 </script>

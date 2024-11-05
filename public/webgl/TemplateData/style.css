@@ -1,16 +1,489 @@
-body { padding: 0; margin: 0 }
-#unity-container { position: absolute }
-#unity-container.unity-desktop { left: 50%; top: 50%; transform: translate(-50%, -50%) }
-#unity-container.unity-mobile { width: 100%; height: 100% }
-#unity-canvas { background: #231F20 }
-.unity-mobile #unity-canvas { width: 100%; height: 100% }
-#unity-loading-bar { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: none }
-#unity-logo { width: 154px; height: 130px; background: url('unity-logo-light.png') no-repeat center }
-#unity-progress-bar-empty { width: 141px; height: 18px; margin-top: 10px; margin-left: 6.5px; background: url('progress-bar-empty-light.png') no-repeat center }
-#unity-progress-bar-full { width: 0%; height: 18px; margin-top: 10px; background: url('progress-bar-full-light.png') no-repeat center }
-#unity-footer { position: relative }
-.unity-mobile #unity-footer { display: none }
-#unity-webgl-logo { float:left; width: 204px; height: 38px; background: url('webgl-logo.png') no-repeat center }
-#unity-build-title { float: right; margin-right: 10px; line-height: 38px; font-family: arial; font-size: 18px }
-#unity-fullscreen-button { float: right; width: 38px; height: 38px; background: url('fullscreen-button.png') no-repeat center }
-#unity-warning { position: absolute; left: 50%; top: 5%; transform: translate(-50%); background: white; padding: 10px; display: none }
+body {
+  padding: 0;
+  margin: 0;
+}
+#unity-container {
+  position: absolute;
+}
+#unity-container.unity-desktop {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+#unity-container.unity-mobile {
+  width: 100%;
+  height: 100%;
+}
+#unity-canvas {
+  background: #231f20;
+}
+.unity-mobile #unity-canvas {
+  width: 100%;
+  height: 100%;
+}
+#unity-loading-bar {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+#unity-logo {
+  width: 154px;
+  height: 130px;
+  background: url("unity-logo-light.png") no-repeat center;
+}
+#unity-progress-bar-empty {
+  width: 141px;
+  height: 141px;
+  background-color: #cccccc00;
+  position: relative;
+}
+#unity-progress-bar-full {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(#3498db 0% 20%, transparent 20% 100%);
+  animation: spin2 4s linear infinite;
+  mask: radial-gradient(farthest-side, transparent 25%, black 175%);
+}
+
+.unity-progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: red;
+  padding: 0;
+  margin: 0;
+}
+
+#unity-footer {
+  position: relative;
+}
+.unity-mobile #unity-footer {
+  display: none;
+}
+#unity-webgl-logo {
+  float: left;
+  width: 0;
+  height: 0;
+  background: url("webgl-logo.png") no-repeat center;
+}
+#unity-build-title {
+  float: right;
+  margin-right: 10px;
+  line-height: 38px;
+  font-family: arial;
+  font-size: 18px;
+}
+#unity-fullscreen-button {
+  float: right;
+  width: 38px;
+  height: 38px;
+  background: url("fullscreen-button.png") no-repeat center;
+}
+#unity-warning {
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  transform: translate(-50%);
+  background: white;
+  padding: 10px;
+  display: none;
+}
+
+@keyframes spin2 {
+  00.00% {
+    background: conic-gradient(#3498db 0% 00%, transparent 00% 100%);
+    transform: rotate(0deg);
+  }
+  00.78% {
+    background: conic-gradient(#3498db 0% 01.56%, transparent 01.56% 100%);
+  }
+  01.56% {
+    background: conic-gradient(#3498db 0% 03.13%, transparent 03.13% 100%);
+  }
+  02.34% {
+    background: conic-gradient(#3498db 0% 04.69%, transparent 04.69% 100%);
+  }
+  03.13% {
+    background: conic-gradient(#3498db 0% 06.25%, transparent 06.25% 100%);
+  }
+  03.91% {
+    background: conic-gradient(#3498db 0% 07.81%, transparent 07.81% 100%);
+  }
+  04.69% {
+    background: conic-gradient(#3498db 0% 09.38%, transparent 09.38% 100%);
+  }
+  05.47% {
+    background: conic-gradient(#3498db 0% 10.94%, transparent 10.94% 100%);
+  }
+  06.25% {
+    background: conic-gradient(#3498db 0% 12.5%, transparent 12.5% 100%);
+  }
+  07.03% {
+    background: conic-gradient(#3498db 0% 14.06%, transparent 14.06% 100%);
+  }
+  07.81% {
+    background: conic-gradient(#3498db 0% 15.63%, transparent 15.63% 100%);
+  }
+  08.59% {
+    background: conic-gradient(#3498db 0% 17.19%, transparent 17.19% 100%);
+  }
+  09.38% {
+    background: conic-gradient(#3498db 0% 18.75%, transparent 18.75% 100%);
+  }
+  10.16% {
+    background: conic-gradient(#3498db 0% 20.31%, transparent 20.31% 100%);
+  }
+  10.94% {
+    background: conic-gradient(#3498db 0% 21.88%, transparent 21.88% 100%);
+  }
+  11.72% {
+    background: conic-gradient(#3498db 0% 23.44%, transparent 23.44% 100%);
+  }
+  12.50% {
+    background: conic-gradient(#3498db 0% 25%, transparent 25% 100%);
+  }
+  13.28% {
+    background: conic-gradient(#3498db 0% 26.56%, transparent 26.56% 100%);
+  }
+  14.06% {
+    background: conic-gradient(#3498db 0% 28.13%, transparent 28.13% 100%);
+  }
+  14.84% {
+    background: conic-gradient(#3498db 0% 29.69%, transparent 29.69% 100%);
+  }
+  15.63% {
+    background: conic-gradient(#3498db 0% 31.25%, transparent 31.25% 100%);
+  }
+  16.41% {
+    background: conic-gradient(#3498db 0% 32.81%, transparent 32.81% 100%);
+  }
+  17.19% {
+    background: conic-gradient(#3498db 0% 34.38%, transparent 34.38% 100%);
+  }
+  17.97% {
+    background: conic-gradient(#3498db 0% 35.94%, transparent 35.94% 100%);
+  }
+  18.75% {
+    background: conic-gradient(#3498db 0% 37.5%, transparent 37.5% 100%);
+  }
+  19.53% {
+    background: conic-gradient(#3498db 0% 39.06%, transparent 39.06% 100%);
+  }
+  20.31% {
+    background: conic-gradient(#3498db 0% 40.63%, transparent 40.63% 100%);
+  }
+  21.09% {
+    background: conic-gradient(#3498db 0% 42.19%, transparent 42.19% 100%);
+  }
+  21.88% {
+    background: conic-gradient(#3498db 0% 43.75%, transparent 43.75% 100%);
+  }
+  22.66% {
+    background: conic-gradient(#3498db 0% 45.31%, transparent 45.31% 100%);
+  }
+  23.44% {
+    background: conic-gradient(#3498db 0% 46.88%, transparent 46.88% 100%);
+  }
+  24.22% {
+    background: conic-gradient(#3498db 0% 48.44%, transparent 48.44% 100%);
+  }
+  25.00% {
+    background: conic-gradient(#3498db 0% 50%, transparent 50% 100%);
+  }
+  25.78% {
+    background: conic-gradient(#3498db 0% 51.56%, transparent 51.56% 100%);
+  }
+  26.56% {
+    background: conic-gradient(#3498db 0% 53.13%, transparent 53.13% 100%);
+  }
+  27.34% {
+    background: conic-gradient(#3498db 0% 54.69%, transparent 54.69% 100%);
+  }
+  28.13% {
+    background: conic-gradient(#3498db 0% 56.25%, transparent 56.25% 100%);
+  }
+  28.91% {
+    background: conic-gradient(#3498db 0% 57.81%, transparent 57.81% 100%);
+  }
+  29.69% {
+    background: conic-gradient(#3498db 0% 59.38%, transparent 59.38% 100%);
+  }
+  30.47% {
+    background: conic-gradient(#3498db 0% 60.94%, transparent 60.94% 100%);
+  }
+  31.25% {
+    background: conic-gradient(#3498db 0% 62.5%, transparent 62.5% 100%);
+  }
+  32.03% {
+    background: conic-gradient(#3498db 0% 64.06%, transparent 64.06% 100%);
+  }
+  32.81% {
+    background: conic-gradient(#3498db 0% 65.63%, transparent 65.63% 100%);
+  }
+  33.59% {
+    background: conic-gradient(#3498db 0% 67.19%, transparent 67.19% 100%);
+  }
+  34.38% {
+    background: conic-gradient(#3498db 0% 68.75%, transparent 68.75% 100%);
+  }
+  35.16% {
+    background: conic-gradient(#3498db 0% 70.31%, transparent 70.31% 100%);
+  }
+  35.94% {
+    background: conic-gradient(#3498db 0% 71.88%, transparent 71.88% 100%);
+  }
+  36.72% {
+    background: conic-gradient(#3498db 0% 73.44%, transparent 73.44% 100%);
+  }
+  37.50% {
+    background: conic-gradient(#3498db 0% 75%, transparent 75% 100%);
+  }
+  38.28% {
+    background: conic-gradient(#3498db 0% 76.56%, transparent 76.56% 100%);
+  }
+  39.06% {
+    background: conic-gradient(#3498db 0% 78.13%, transparent 78.13% 100%);
+  }
+  39.84% {
+    background: conic-gradient(#3498db 0% 79.69%, transparent 79.69% 100%);
+  }
+  40.63% {
+    background: conic-gradient(#3498db 0% 81.25%, transparent 81.25% 100%);
+  }
+  41.41% {
+    background: conic-gradient(#3498db 0% 82.81%, transparent 82.81% 100%);
+  }
+  42.19% {
+    background: conic-gradient(#3498db 0% 84.38%, transparent 84.38% 100%);
+  }
+  42.97% {
+    background: conic-gradient(#3498db 0% 85.94%, transparent 85.94% 100%);
+  }
+  43.75% {
+    background: conic-gradient(#3498db 0% 87.5%, transparent 87.5% 100%);
+  }
+  44.53% {
+    background: conic-gradient(#3498db 0% 89.06%, transparent 89.06% 100%);
+  }
+  45.31% {
+    background: conic-gradient(#3498db 0% 90.63%, transparent 90.63% 100%);
+  }
+  46.09% {
+    background: conic-gradient(#3498db 0% 92.19%, transparent 92.19% 100%);
+  }
+  46.88% {
+    background: conic-gradient(#3498db 0% 93.75%, transparent 93.75% 100%);
+  }
+  47.66% {
+    background: conic-gradient(#3498db 0% 95.31%, transparent 95.31% 100%);
+  }
+  48.44% {
+    background: conic-gradient(#3498db 0% 96.88%, transparent 96.88% 100%);
+  }
+  49.22% {
+    background: conic-gradient(#3498db 0% 98.44%, transparent 98.44% 100%);
+  }
+  50.00% {
+    background: conic-gradient(#3498db 0% 100%, transparent 100% 100%);
+    transform: rotate(360deg);
+  }
+  50.78% {
+    background: conic-gradient(#3498db 0% 98.44%, transparent 98.44% 100%);
+  }
+  51.56% {
+    background: conic-gradient(#3498db 0% 96.88%, transparent 96.88% 100%);
+  }
+  52.34% {
+    background: conic-gradient(#3498db 0% 95.31%, transparent 95.31% 100%);
+  }
+  53.13% {
+    background: conic-gradient(#3498db 0% 93.75%, transparent 93.75% 100%);
+  }
+  53.91% {
+    background: conic-gradient(#3498db 0% 92.19%, transparent 92.19% 100%);
+  }
+  54.69% {
+    background: conic-gradient(#3498db 0% 90.63%, transparent 90.63% 100%);
+  }
+  55.47% {
+    background: conic-gradient(#3498db 0% 89.06%, transparent 89.06% 100%);
+  }
+  56.25% {
+    background: conic-gradient(#3498db 0% 87.5%, transparent 87.5% 100%);
+  }
+  57.03% {
+    background: conic-gradient(#3498db 0% 85.94%, transparent 85.94% 100%);
+  }
+  57.81% {
+    background: conic-gradient(#3498db 0% 84.38%, transparent 84.38% 100%);
+  }
+  58.59% {
+    background: conic-gradient(#3498db 0% 82.81%, transparent 82.81% 100%);
+  }
+  59.38% {
+    background: conic-gradient(#3498db 0% 81.25%, transparent 81.25% 100%);
+  }
+  60.16% {
+    background: conic-gradient(#3498db 0% 79.69%, transparent 79.69% 100%);
+  }
+  60.94% {
+    background: conic-gradient(#3498db 0% 78.13%, transparent 78.13% 100%);
+  }
+  61.72% {
+    background: conic-gradient(#3498db 0% 76.56%, transparent 76.56% 100%);
+  }
+  62.50% {
+    background: conic-gradient(#3498db 0% 75%, transparent 75% 100%);
+  }
+  63.28% {
+    background: conic-gradient(#3498db 0% 73.44%, transparent 73.44% 100%);
+  }
+  64.06% {
+    background: conic-gradient(#3498db 0% 71.88%, transparent 71.88% 100%);
+  }
+  64.84% {
+    background: conic-gradient(#3498db 0% 70.31%, transparent 70.31% 100%);
+  }
+  65.63% {
+    background: conic-gradient(#3498db 0% 68.75%, transparent 68.75% 100%);
+  }
+  66.41% {
+    background: conic-gradient(#3498db 0% 67.19%, transparent 67.19% 100%);
+  }
+  67.19% {
+    background: conic-gradient(#3498db 0% 65.63%, transparent 65.63% 100%);
+  }
+  67.97% {
+    background: conic-gradient(#3498db 0% 64.06%, transparent 64.06% 100%);
+  }
+  68.75% {
+    background: conic-gradient(#3498db 0% 62.5%, transparent 62.5% 100%);
+  }
+  69.53% {
+    background: conic-gradient(#3498db 0% 60.94%, transparent 60.94% 100%);
+  }
+  70.31% {
+    background: conic-gradient(#3498db 0% 59.38%, transparent 59.38% 100%);
+  }
+  71.09% {
+    background: conic-gradient(#3498db 0% 57.81%, transparent 57.81% 100%);
+  }
+  71.88% {
+    background: conic-gradient(#3498db 0% 56.25%, transparent 56.25% 100%);
+  }
+  72.66% {
+    background: conic-gradient(#3498db 0% 54.69%, transparent 54.69% 100%);
+  }
+  73.44% {
+    background: conic-gradient(#3498db 0% 53.13%, transparent 53.13% 100%);
+  }
+  74.22% {
+    background: conic-gradient(#3498db 0% 51.56%, transparent 51.56% 100%);
+  }
+  75.00% {
+    background: conic-gradient(#3498db 0% 50%, transparent 50% 100%);
+  }
+  75.78% {
+    background: conic-gradient(#3498db 0% 48.44%, transparent 48.44% 100%);
+  }
+  76.56% {
+    background: conic-gradient(#3498db 0% 46.88%, transparent 46.88% 100%);
+  }
+  77.34% {
+    background: conic-gradient(#3498db 0% 45.31%, transparent 45.31% 100%);
+  }
+  78.13% {
+    background: conic-gradient(#3498db 0% 43.75%, transparent 43.75% 100%);
+  }
+  78.91% {
+    background: conic-gradient(#3498db 0% 42.19%, transparent 42.19% 100%);
+  }
+  79.69% {
+    background: conic-gradient(#3498db 0% 40.63%, transparent 40.63% 100%);
+  }
+  80.47% {
+    background: conic-gradient(#3498db 0% 39.06%, transparent 39.06% 100%);
+  }
+  81.25% {
+    background: conic-gradient(#3498db 0% 37.5%, transparent 37.5% 100%);
+  }
+  82.03% {
+    background: conic-gradient(#3498db 0% 35.94%, transparent 35.94% 100%);
+  }
+  82.81% {
+    background: conic-gradient(#3498db 0% 34.38%, transparent 34.38% 100%);
+  }
+  83.59% {
+    background: conic-gradient(#3498db 0% 32.81%, transparent 32.81% 100%);
+  }
+  84.38% {
+    background: conic-gradient(#3498db 0% 31.25%, transparent 31.25% 100%);
+  }
+  85.16% {
+    background: conic-gradient(#3498db 0% 29.69%, transparent 29.69% 100%);
+  }
+  85.94% {
+    background: conic-gradient(#3498db 0% 28.13%, transparent 28.13% 100%);
+  }
+  86.72% {
+    background: conic-gradient(#3498db 0% 26.56%, transparent 26.56% 100%);
+  }
+  87.50% {
+    background: conic-gradient(#3498db 0% 25%, transparent 25% 100%);
+  }
+  88.28% {
+    background: conic-gradient(#3498db 0% 23.44%, transparent 23.44% 100%);
+  }
+  89.06% {
+    background: conic-gradient(#3498db 0% 21.88%, transparent 21.88% 100%);
+  }
+  89.84% {
+    background: conic-gradient(#3498db 0% 20.31%, transparent 20.31% 100%);
+  }
+  90.63% {
+    background: conic-gradient(#3498db 0% 18.75%, transparent 18.75% 100%);
+  }
+  91.41% {
+    background: conic-gradient(#3498db 0% 17.19%, transparent 17.19% 100%);
+  }
+  92.19% {
+    background: conic-gradient(#3498db 0% 15.63%, transparent 15.63% 100%);
+  }
+  92.97% {
+    background: conic-gradient(#3498db 0% 14.06%, transparent 14.06% 100%);
+  }
+  93.75% {
+    background: conic-gradient(#3498db 0% 12.5%, transparent 12.5% 100%);
+  }
+  94.53% {
+    background: conic-gradient(#3498db 0% 10.94%, transparent 10.94% 100%);
+  }
+  95.31% {
+    background: conic-gradient(#3498db 0% 09.38%, transparent 09.38% 100%);
+  }
+  96.09% {
+    background: conic-gradient(#3498db 0% 07.81%, transparent 07.81% 100%);
+  }
+  96.88% {
+    background: conic-gradient(#3498db 0% 06.25%, transparent 06.25% 100%);
+  }
+  97.66% {
+    background: conic-gradient(#3498db 0% 04.69%, transparent 04.69% 100%);
+  }
+  98.44% {
+    background: conic-gradient(#3498db 0% 03.13%, transparent 03.13% 100%);
+  }
+  99.22% {
+    background: conic-gradient(#3498db 0% 01.56%, transparent 01.56% 100%);
+  }
+  100.00% {
+    background: conic-gradient(#3498db 0% 00%, transparent 00% 100%);
+    transform: rotate(1440deg);
+  }
+}

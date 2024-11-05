@@ -111,15 +111,15 @@ export default {
         const unityCanvas = iframe.contentWindow.document.getElementById('unity-canvas')
         if (unityCanvas) {
           const unityStream = unityCanvas.captureStream(120)
-          console.log(unityStream)
+          const unityStream2 = unityCanvas.captureStream(120)
           const videoElement = this.$refs.unityStreamVideo
           videoElement.srcObject = unityStream
           videoElement.onloadedmetadata = function () {
             videoElement.play()
           }
 
-          unityStream.getTracks().forEach(track => {
-            this.unityPeerConnection.addTrack(track, unityStream)
+          unityStream2.getTracks().forEach(track => {
+            this.unityPeerConnection.addTrack(track, unityStream2)
           })
 
           this.unityPeerConnection.createOffer().then(offer => {

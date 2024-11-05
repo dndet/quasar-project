@@ -12,29 +12,37 @@ export default {
       stream: null
     }
   },
-  props: ['selected-Camera'],
-  mounted () {
-    this.startWebcam()
+  props: { selectedCamera: { type: Object, required: true }, stateUnity: { type: Boolean, required: false } },
+  watch: {
+    selectedCamera: {
+      handler (newCamera) {
+        this.startVideoStream(newCamera.value)
+      },
+      immediate: true
+    },
+    stateUnity: {
+      handler (state) {
+        if (!state) this.startVideoStream(this.selectedCamera.value)
+      }
+    }
   },
   methods: {
-    async startWebcam () {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        try {
-          const stream = await navigator.mediaDevices.getUserMedia({ video: true })
-          this.$refs.video.srcObject = stream
-          this.stream = stream
-        } catch (err) {
-          console.error('Error accessing webcam: ', err)
-        }
-      } else {
-        console.error('getUserMedia không được hỗ trợ trên trình duyệt của bạn!')
-      }
-    },
     beforeDestroy () {
       if (this.stream) {
         const tracks = this.stream.getTracks()
         tracks.forEach((track) => track.stop())
       }
+    },
+    async startVideoStream (deviceId) {
+      try {
+        if (this.$refs.video.srcObject) {
+          this.$refs.video.srcObject.getTracks().forEach(track => track.stop())
+        }
+      } catch (e) {}
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { deviceId: { exact: deviceId } }
+      })
+      this.$refs.video.srcObject = stream
     }
   }
 }

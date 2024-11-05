@@ -38,7 +38,7 @@ export default {
       cameraStream: null
     }
   },
-  props: ['selected-Camera'],
+  props: ['selectedCamera'],
   mounted () {
     this.loadExternalScripts() // Nạp các script bên ngoài
   },
@@ -126,7 +126,7 @@ export default {
     async requestCameraAccess () {
       try {
         const webcamVideoElement = this.$refs.webcamVideo
-        webcamVideoElement.srcObject = selected-Camera
+        webcamVideoElement.srcObject = selectedCamera
 
         console.log('Camera access granted')
       } catch (error) {
