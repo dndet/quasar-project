@@ -148,6 +148,9 @@ export default {
         console.log(window)
       }
     },
+    async requestDeviceMotion () {
+      await window.addEventListener('devicemotion', this.handleMotion)
+    },
     handleMotion (event) {
       this.accelerationX = event.acceleration.x
       this.accelerationY = event.acceleration.y
