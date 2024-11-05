@@ -141,6 +141,7 @@ export default {
             this.beta = event.beta
             this.gamma = event.gamma
             this.targetDevice = event.target
+            console.log(event)
             console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
           }
         )
