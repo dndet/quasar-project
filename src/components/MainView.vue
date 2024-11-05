@@ -148,17 +148,6 @@ export default {
         console.log(window)
       }
     },
-    handleOrientation (event) {
-      this.alpha = event.alpha
-      this.beta = event.beta
-      this.gamma = event.gamma
-      this.targetDevice = event.target
-      console.log(event)
-      console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
-    },
-    async requestDeviceMotion () {
-      await window.addEventListener('devicemotion', this.handleMotion)
-    },
     handleMotion (event) {
       this.accelerationX = event.acceleration.x
       this.accelerationY = event.acceleration.y
