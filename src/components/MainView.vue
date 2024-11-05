@@ -123,30 +123,17 @@ export default {
       return /Android/.test(navigator.userAgent)
     },
     async requestDeviceOrientation () {
-      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
-          .then(permissionState => {
-            if (permissionState === 'granted') {
-              window.addEventListener('deviceorientation', this.handleOrientation)
-              alert('Device orientation access granted. 1')
-            } else {
-              alert('Device orientation access denied.')
-            }
-          })
-          .catch(console.error)
-      } else {
-        await window.addEventListener('deviceorientation',
-          (event) => {
-            this.alpha = event.alpha
-            this.beta = event.beta
-            this.gamma = event.gamma
-            this.targetDevice = event.target
-            console.log(event)
-            console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
-          }
-        )
-        console.log(window)
-      }
+      await window.addEventListener('deviceorientation',
+        (event) => {
+          this.alpha = event.alpha
+          this.beta = event.beta
+          this.gamma = event.gamma
+          this.targetDevice = event.target
+          console.log(event)
+          console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
+        }
+      )
+      console.log(window)
     },
     async requestDeviceMotion () {
       await window.addEventListener('devicemotion', this.handleMotion)
@@ -157,12 +144,6 @@ export default {
       this.accelerationZ = event.acceleration.z
       console.log(event)
       console.log(`Acceleration - X: ${this.accelerationX}, Y: ${this.accelerationY}, Z: ${this.accelerationZ}`)
-
-      this.alpha = event.rotationRate.alpha
-      this.beta = event.rotationRate.beta
-      this.gamma = event.rotationRate.gamma
-      this.targetDevice = event.target
-      console.log(`Alpha: ${event.rotationRate.alpha}, Beta: ${event.rotationRate.beta}, Gamma: ${event.rotationRate.gamma}`)
     },
     requestMagnetometer () {
       if ('magnetometer' in navigator) {
