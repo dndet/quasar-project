@@ -50,6 +50,10 @@
       {{ this.targetDevice }}
       <br>
       Acceleration - X: {{this.accelerationX}}, Y: {{this.accelerationY}}, Z: {{this.accelerationZ}}
+      <br>
+      Magnetic Field - X: {{this.magneticFieldX}}, Y: {{this.magneticFieldY}}, Z: {{this.magneticFieldZ}}
+      <br>
+      Location - Lat: {{this.latitude}}, Long: {{this.longitude}}
     </div>
   </div>
   </div>
@@ -140,6 +144,7 @@ export default {
       this.beta = event.beta
       this.gamma = event.gamma
       this.targetDevice = event.target
+      console.log(event)
       console.log(`Alpha: ${this.alpha}, Beta: ${this.beta}, Gamma: ${this.gamma}`)
     },
     requestDeviceMotion () {
