@@ -136,7 +136,12 @@ export default {
           .catch(console.error)
       } else {
         await window.addEventListener('deviceorientation',
-          (v) => {
+          (event) => {
+            this.alpha = event.alpha
+            this.beta = event.beta
+            this.gamma = event.gamma
+            this.targetDevice = event.target
+            console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
           }
         )
         console.log(window)
