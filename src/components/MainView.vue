@@ -122,7 +122,7 @@ export default {
     isAndroidDevice () {
       return /Android/.test(navigator.userAgent)
     },
-    requestDeviceOrientation () {
+    async requestDeviceOrientation () {
       if (typeof DeviceOrientationEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
           .then(permissionState => {
@@ -135,7 +135,7 @@ export default {
           })
           .catch(console.error)
       } else {
-        window.addEventListener('deviceorientation', this.handleOrientation)
+        await window.addEventListener('deviceorientation', this.handleOrientation)
         alert('Device orientation access granted. 2')
       }
     },
@@ -145,10 +145,10 @@ export default {
       this.gamma = event.gamma
       this.targetDevice = event.target
       console.log(event)
-      console.log(`Alpha: ${this.alpha}, Beta: ${this.beta}, Gamma: ${this.gamma}`)
+      console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
     },
-    requestDeviceMotion () {
-      window.addEventListener('devicemotion', this.handleMotion)
+    async requestDeviceMotion () {
+      await window.addEventListener('devicemotion', this.handleMotion)
     },
     handleMotion (event) {
       this.accelerationX = event.acceleration.x
@@ -171,14 +171,6 @@ export default {
       this.magneticFieldY = event.magneticField.y
       this.magneticFieldZ = event.magneticField.z
       console.log(`Magnetic Field - X: ${this.magneticFieldX}, Y: ${this.magneticFieldY}, Z: ${this.magneticFieldZ}`)
-    },
-    handleLightSensor (event) {
-      this.lightLevel = event.illuminance
-      console.log(`Light Level: ${this.lightLevel} lux`)
-    },
-    handleProximitySensor (event) {
-      this.proximityDistance = event.distance
-      console.log(`Proximity Distance: ${this.proximityDistance} meters`)
     },
     requestGeolocation () {
       if ('geolocation' in navigator) {
