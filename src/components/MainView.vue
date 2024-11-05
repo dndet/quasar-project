@@ -47,6 +47,8 @@
     <div>
       Alpha: {{this.alpha}}, Beta: {{this.beta}}, Gamma: {{this.gamma}}
       <br>
+      {{ this.targetDevice }}
+      <br>
       Acceleration - X: {{this.accelerationX}}, Y: {{this.accelerationY}}, Z: {{this.accelerationZ}}
     </div>
   </div>
@@ -85,7 +87,8 @@ export default {
       lightLevel: null,
       proximityDistance: null,
       latitude: null,
-      longitude: null
+      longitude: null,
+      targetDevice: null
     }
   },
   methods: {
@@ -136,6 +139,7 @@ export default {
       this.alpha = event.alpha
       this.beta = event.beta
       this.gamma = event.gamma
+      this.targetDevice = event.target
       console.log(`Alpha: ${this.alpha}, Beta: ${this.beta}, Gamma: ${this.gamma}`)
     },
     requestDeviceMotion () {
