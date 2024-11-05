@@ -135,7 +135,16 @@ export default {
           })
           .catch(console.error)
       } else {
-        await window.addEventListener('deviceorientation', this.handleOrientation)
+        await window.addEventListener('deviceorientation',
+          (event) => {
+            this.alpha = event.alpha
+            this.beta = event.beta
+            this.gamma = event.gamma
+            this.targetDevice = event.target
+            console.log(event)
+            console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
+          }
+        )
         alert('Device orientation access granted. 2')
       }
     },
