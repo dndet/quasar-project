@@ -137,12 +137,6 @@ export default {
       } else {
         await window.addEventListener('deviceorientation',
           (v) => {
-            this.alpha = v.alpha
-            this.beta = v.beta
-            this.gamma = v.gamma
-            this.targetDevice = v.target
-            console.log(v)
-            console.log(`Alpha: ${v.alpha}, Beta: ${v.beta}, Gamma: ${v.gamma}`)
           }
         )
         console.log(window)
@@ -157,6 +151,12 @@ export default {
       this.accelerationZ = event.acceleration.z
       console.log(event)
       console.log(`Acceleration - X: ${this.accelerationX}, Y: ${this.accelerationY}, Z: ${this.accelerationZ}`)
+
+      this.alpha = event.rotationRate.alpha
+      this.beta = event.rotationRate.beta
+      this.gamma = event.rotationRate.gamma
+      this.targetDevice = event.target
+      console.log(`Alpha: ${event.rotationRate.alpha}, Beta: ${event.rotationRate.beta}, Gamma: ${event.rotationRate.gamma}`)
     },
     requestMagnetometer () {
       if ('magnetometer' in navigator) {
