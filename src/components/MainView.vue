@@ -63,6 +63,22 @@
 import WebcamView from './WebcamView.vue'
 import WebGLView from './WebGLView.vue'
 import { QBtn, QDialog, QCard, QCardSection } from 'quasar'
+import Vue from 'vue'
+
+Vue.directive('device-orientation',
+  {
+    bind (el, binding) {
+      const handleOrientation = (event) => {
+        binding.value(event)
+      }
+      window.addEventListener('deviceorientation', handleOrientation)
+      el._handleOrientation = handleOrientation
+    },
+    unbind (el) {
+      window.removeEventListener('deviceorientation', el._handleOrientation)
+    }
+  }
+)
 
 export default {
   name: 'MainView',
@@ -135,6 +151,12 @@ export default {
       )
       console.log(window)
     },
+    handleOrientation (event) {
+      this.alpha = event.alpha
+      this.beta = event.beta
+      this.gamma = event.gamma
+      console.log(`Alpha: ${this.alpha}, Beta: ${this.beta}, Gamma: ${this.gamma}`)
+    },
     async requestDeviceMotion () {
       await window.addEventListener('devicemotion', this.handleMotion)
     },
@@ -146,7 +168,8 @@ export default {
       console.log(`Acceleration - X: ${this.accelerationX}, Y: ${this.accelerationY}, Z: ${this.accelerationZ}`)
     },
     requestMagnetometer () {
-      if ('magnetometer' in navigator) {
+      console.log(navigator)
+      if ('Magnetometer' in navigator) {
         const magnetometer = navigator.magnetometer
         magnetometer.addEventListener('reading', this.handleMagnetometer)
         magnetometer.start()
@@ -162,7 +185,11 @@ export default {
     },
     requestGeolocation () {
       if ('geolocation' in navigator) {
-        navigator.geolocation.getCurrentPosition(this.handleGeolocation)
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            this.handleGeolocation(position)
+          }
+        )
       } else {
         console.log('Geolocation not supported.')
       }
