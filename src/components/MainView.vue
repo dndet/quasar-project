@@ -238,7 +238,7 @@ export default {
     this.requestDeviceMotion()
     this.requestMagnetometer()
     this.requestGeolocation()
-    this.setAmbientLight ()
+    this.setAmbientLight()
   }
 }
 </script>
