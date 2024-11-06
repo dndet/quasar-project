@@ -139,16 +139,21 @@ export default {
       return /Android/.test(navigator.userAgent)
     },
     async requestDeviceOrientation () {
-      await window.addEventListener('deviceorientation',
-        (event) => {
-          this.alpha = event.alpha
-          this.beta = event.beta
-          this.gamma = event.gamma
-          this.targetDevice = event.target
-          console.log(event)
-          console.log(`Alpha: ${event.alpha}, Beta: ${event.beta}, Gamma: ${event.gamma}`)
-        }
-      )
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('deviceorientation', this.handleOrientation)
+              alert('Device orientation access granted.')
+            } else {
+              alert('Device orientation access denied.')
+            }
+          })
+          .catch(console.error)
+      } else {
+        window.addEventListener('deviceorientation', this.handleOrientation)
+        alert('Device orientation access granted.')
+      }
       console.log(window)
     },
     handleOrientation (event) {
@@ -171,6 +176,7 @@ export default {
       console.log(navigator)
       if ('Magnetometer' in navigator) {
         const magnetometer = navigator.magnetometer
+        console.log(magnetometer)
         magnetometer.addEventListener('reading', this.handleMagnetometer)
         magnetometer.start()
       } else {
@@ -201,6 +207,11 @@ export default {
     }
   },
   async mounted () {
+    if ('Gyroscope' in window) {
+      console.log('Gyroscope is supported')
+    } else {
+      console.log('Gyroscope is not supported')
+    }
     const videoDevices = await this.getCameras()
     console.log(videoDevices)
     this.options = videoDevices.map(device => ({
