@@ -204,21 +204,6 @@ export default {
       this.latitude = position.coords.latitude
       this.longitude = position.coords.longitude
       console.log(`Location - Lat: ${this.latitude}, Long: ${this.longitude}`)
-    },
-    setAmbientLight () {
-      if ('AmbientLightSensor' in window) {
-        try {
-          const sensor = new AmbientLightSensor()
-          sensor.addEventListener('reading', () => {
-            console.log(`Current light level: ${sensor.illuminance} lux`)
-          })
-          sensor.start()
-        } catch (error) {
-          console.error('Ambient Light Sensor error:', error)
-        }
-      } else {
-        console.log('Ambient Light Sensor is not supported')
-      }
     }
   },
   async mounted () {
@@ -238,7 +223,6 @@ export default {
     this.requestDeviceMotion()
     this.requestMagnetometer()
     this.requestGeolocation()
-    this.setAmbientLight()
   }
 }
 </script>
