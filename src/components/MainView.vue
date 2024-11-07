@@ -1,10 +1,10 @@
 <template>
   <div class="main-container">
-    <div v-if="!showWebGL">
+    <div v-if="!showWebGL" :key="!showWebGL">
       <transition name="fade">
         <q-card style="width: 650px; max-width: 100%;">
           <q-card-section>
-            <WebcamView :selectedCamera = this.model :stateUnity = this.showWebGL />
+            <WebcamView :selectedCamera = "model || {}" :stateUnity = showWebGL />
           </q-card-section>
           <q-card-actions align="center">
             <q-btn
@@ -17,7 +17,7 @@
         </q-card>
       </transition>
     </div>
-    <div v-else>
+    <div v-else :key="showWebGL">
       <q-dialog v-model="showWebGL" persistent maximized transition-show="scale" transition-hide="scale">
         <q-card style="min-width: 100vh">
           <q-card-section>
@@ -26,7 +26,7 @@
               <q-btn icon="close" flat round dense @click="toggleWebGL" />
             </div>
             <div class="webgl-container">
-              <WebGLView :selectedCamera = 'model' />
+              <WebGLView :selectedCamera = "model || {}" />
             </div>
           </q-card-section>
         </q-card>
@@ -133,7 +133,7 @@ export default {
       return devices.filter(device => device.kind === 'videoinput')
     },
     isIOS () {
-      return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
+      return /iPad|iPhone/.test(navigator.userAgent) && !window.MSStream
     },
     isAndroidDevice () {
       return /Android/.test(navigator.userAgent)
@@ -144,15 +144,15 @@ export default {
           .then(permissionState => {
             if (permissionState === 'granted') {
               window.addEventListener('deviceorientation', this.handleOrientation)
-              alert('Device orientation access granted.')
+              console.log('Device orientation access granted.')
             } else {
-              alert('Device orientation access denied.')
+              console.log('Device orientation access denied.')
             }
           })
           .catch(console.error)
       } else {
         window.addEventListener('deviceorientation', this.handleOrientation)
-        alert('Device orientation access granted.')
+        console.log('Device orientation access granted.')
       }
       console.log(window)
     },
@@ -212,6 +212,9 @@ export default {
     } else {
       console.log('Gyroscope is not supported')
     }
+    if (this.isIOS()) {
+      alert('Using IOS')
+    }
     const videoDevices = await this.getCameras()
     console.log(videoDevices)
     this.options = videoDevices.map(device => ({
@@ -219,10 +222,10 @@ export default {
       value: device.deviceId
     }))
     console.log(this.options)
-    this.requestDeviceOrientation()
-    this.requestDeviceMotion()
-    this.requestMagnetometer()
-    this.requestGeolocation()
+    await this.requestDeviceOrientation()
+    await this.requestDeviceMotion()
+    await this.requestMagnetometer()
+    await this.requestGeolocation()
   }
 }
 </script>
