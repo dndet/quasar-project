@@ -222,10 +222,6 @@ export default {
       value: device.deviceId
     }))
     console.log(this.options)
-    await this.requestDeviceOrientation()
-    await this.requestDeviceMotion()
-    await this.requestMagnetometer()
-    await this.requestGeolocation()
   }
 }
 </script>
