@@ -146,19 +146,7 @@ export default {
               window.addEventListener('deviceorientation', this.handleOrientation)
               alert('Device orientation access granted.')
             } else {
-              console.log('Device orientation access denied.')
-              const button = document.createElement('button')
-              button.innerText = 'Enable Orientation'
-              button.style.position = 'absolute'
-              button.style.top = '100%'
-              button.style.left = '100%'
-              button.style.transform = 'translate(50%, 50%)'
-              document.body.appendChild(button)
-
-              button.addEventListener('click', () => {
-                window.addEventListener('deviceorientation', this.handleOrientation)
-                document.body.removeChild(button) // Remove button after requesting permissions
-              })
+              alert('Device orientation access denied.')
             }
           })
           .catch(console.error)
