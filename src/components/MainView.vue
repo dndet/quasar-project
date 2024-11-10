@@ -139,7 +139,7 @@ export default {
       return /Android/.test(navigator.userAgent)
     },
     async requestDeviceOrientation () {
-      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+      if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
         DeviceOrientationEvent.requestPermission()
           .then(permissionState => {
             if (permissionState === 'granted') {
@@ -222,6 +222,18 @@ export default {
       value: device.deviceId
     }))
     console.log(this.options)
+    try {
+      await this.requestDeviceOrientation()
+    } catch (e) { }
+    try {
+      await this.requestDeviceMotion()
+    } catch (e) { }
+    try {
+      await this.requestMagnetometer()
+    } catch (e) { }
+    try {
+      await this.requestGeolocation()
+    } catch (e) { }
   }
 }
 </script>

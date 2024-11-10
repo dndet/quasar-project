@@ -41,18 +41,6 @@ export default {
     }
   },
   async mounted () {
-    try {
-      await this.requestDeviceOrientation()
-    } catch (e) { }
-    try {
-      await this.requestDeviceMotion()
-    } catch (e) { }
-    try {
-      await this.requestMagnetometer()
-    } catch (e) { }
-    try {
-      await this.requestGeolocation()
-    } catch (e) { }
   },
   methods: {
     beforeDestroy () {
