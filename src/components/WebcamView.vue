@@ -41,10 +41,18 @@ export default {
     }
   },
   async mounted () {
-    await this.requestDeviceOrientation()
-    await this.requestDeviceMotion()
-    await this.requestMagnetometer()
-    await this.requestGeolocation()
+    try {
+      await this.requestDeviceOrientation()
+    } catch (e) { }
+    try {
+      await this.requestDeviceMotion()
+    } catch (e) { }
+    try {
+      await this.requestMagnetometer()
+    } catch (e) { }
+    try {
+      await this.requestGeolocation()
+    } catch (e) { }
   },
   methods: {
     beforeDestroy () {
