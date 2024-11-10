@@ -170,9 +170,9 @@
             loadingBar.style.display = "none";
           });
         }, 5000);
-        // StartMotionSensors();
+        StartMotionSensors();
 
-        // StartGPS();
+        StartGPS();
 
         loadingBar.style.display = "block";
       }
@@ -312,6 +312,21 @@
       }
 
       function StartMotionSensors() {
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+        DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+            if (permissionState === 'granted') {
+              window.addEventListener('deviceorientation', this.handleOrientation)
+              alert('Device orientation access granted.')
+            } else {
+              alert('Device orientation access denied.')
+            }
+          })
+          .catch(console.error)
+      } else {
+        window.addEventListener('deviceorientation', this.handleOrientation)
+        alert('Device orientation access granted.')
+      }
         window.wTracker
           .startAngles()
           .then(() => {
@@ -333,6 +348,13 @@
             console.error("Failed to start GPS - " + error);
             //ShowError("Failed to start GPS " + error);
           });
+      }
+
+      function handleOrientation (event) {
+        this.alpha = event.alpha
+        this.beta = event.beta
+        this.gamma = event.gamma
+        console.log(`Alpha: ${this.alpha}, Beta: ${this.beta}, Gamma: ${this.gamma}`)
       }
 
       function ShowError(error) {

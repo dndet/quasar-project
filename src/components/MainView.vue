@@ -223,9 +223,6 @@ export default {
     }))
     console.log(this.options)
     try {
-      await this.requestDeviceOrientation()
-    } catch (e) { }
-    try {
       await this.requestDeviceMotion()
     } catch (e) { }
     try {
