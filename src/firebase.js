@@ -21,7 +21,7 @@ export async function requestPermission () {
     if (permission === 'granted') {
       console.log('Permission granted for notifications.')
       // Lấy token FCM sau khi người dùng cấp quyền
-      getToken(messaging, { vapidKey: 'your-public-vapid-key' }).then(token => {
+      getToken(messaging, { vapidKey: 'BPHN_qzYhVo10kLvT8hd2UiwoP9xGZrLHKOqXXxn9ZaIup7a0eGOOYYCWigVdjqmsi4wO5aZxVRRkuorJtphuI8' }).then(token => {
         if (token) {
           console.log('FCM token:', token)
         } else {
