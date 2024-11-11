@@ -1,6 +1,6 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { initializeApp } from "firebase/app";
+// import { getMessaging } from "firebase/messaging";
+// import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // firebase-messaging-sw.js
@@ -19,19 +19,5 @@ const firebaseConfig = {
   measurementId: "G-BQVXQ5M8JP"
 };
 
-firebase.initializeApp(firebaseConfig);
-
-// Khởi tạo Firebase Cloud Messaging
-const messaging = firebase.messaging();
-
-// Xử lý khi nhận thông báo
-messaging.onBackgroundMessage((payload) => {
-  console.log('Received background message ', payload);
-  const notificationTitle = payload.notification.title;
-  const notificationOptions = {
-    body: payload.notification.body,
-    icon: '/images/notification-icon.png'
-  };
-
-  self.registration.showNotification(notificationTitle, notificationOptions);
-});
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
