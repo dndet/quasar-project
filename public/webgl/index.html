@@ -285,7 +285,7 @@
       function SelectCam() {
         var select = document.getElementById("chooseCamSel");
         window.deviceId = webCamSelected.value;
-        window.WEBCAM_SETTINGS.video["deviceId"] = deviceId;
+        window.WEBCAM_SETTINGS.video["deviceId"] = window.deviceId;
         //console.log(window.WEBCAM_SETTINGS);
         wTracker.WEBCAM_NAME = select.options[select.selectedIndex].innerHTML;
       }
