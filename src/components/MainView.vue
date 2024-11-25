@@ -221,10 +221,10 @@ export default {
     console.log(tet)
     const videoDevices = await this.getCameras()
     let rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'))
-    console.log(rearCamera)
     if (!rearCamera) {
       rearCamera = videoDevices[0]
     }
+    console.log(rearCamera)
     console.log(videoDevices)
     this.model = {
       label: rearCamera.label || `Camera ${this.options.length + 1}`,
