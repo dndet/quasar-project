@@ -172,8 +172,6 @@ export default {
       this.accelerationX = event.acceleration.x
       this.accelerationY = event.acceleration.y
       this.accelerationZ = event.acceleration.z
-      console.log(event)
-      console.log(`Acceleration - X: ${this.accelerationX}, Y: ${this.accelerationY}, Z: ${this.accelerationZ}`)
     },
     requestMagnetometer () {
       console.log(navigator)
