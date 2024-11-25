@@ -217,6 +217,8 @@ export default {
     if (this.isIOS()) {
       alert('Using IOS')
     }
+    const tet = this.getRearCamera()
+    console.log(tet)
     const videoDevices = await this.getCameras()
     let rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'))
     console.log(rearCamera)
