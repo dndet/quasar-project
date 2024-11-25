@@ -33,17 +33,6 @@
       </q-dialog>
     </div>
     <div class="q-pa-md">
-    <div class="q-gutter-md row">
-      <q-select
-        label="Cameras"
-        transition-show="scale"
-        transition-hide="scale"
-        filled
-        v-model="model"
-        :options="options"
-        style="width: 250px"
-      ></q-select>
-    </div>
     <div>
       Alpha: {{this.alpha}}, Beta: {{this.beta}}, Gamma: {{this.gamma}}
       <br>
@@ -132,6 +121,19 @@ export default {
       const devices = await navigator.mediaDevices.enumerateDevices()
       return devices.filter(device => device.kind === 'videoinput')
     },
+    async getRearCamera () {
+      try {
+        const constraints = {
+          video: {
+            facingMode: { exact: 'environment' }
+          }
+        }
+        const stream = await navigator.mediaDevices.getUserMedia(constraints)
+        return stream
+      } catch (error) {
+        console.error('Lỗi khi truy cập camera sau:', error)
+      }
+    },
     isIOS () {
       return /iPad|iPhone/.test(navigator.userAgent) && !window.MSStream
     },
@@ -216,11 +218,16 @@ export default {
       alert('Using IOS')
     }
     const videoDevices = await this.getCameras()
+    let rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'))
+    console.log(rearCamera)
+    if (!rearCamera) {
+      rearCamera = videoDevices[0]
+    }
     console.log(videoDevices)
-    this.options = videoDevices.map(device => ({
-      label: device.label || `Camera ${this.options.length + 1}`,
-      value: device.deviceId
-    }))
+    this.model = {
+      label: rearCamera.label || `Camera ${this.options.length + 1}`,
+      value: rearCamera.deviceId
+    }
     console.log(this.options)
     try {
       await this.requestDeviceOrientation()
