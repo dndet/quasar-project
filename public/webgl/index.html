@@ -190,8 +190,16 @@
       async function RequestWebcam(deviceId) {
         window.requestingForCameraPermission = true;
         try {
+          const devices = await navigator.mediaDevices.enumerateDevices();
+          const videoDevices = devices.filter(device => device.kind === 'videoinput');
+          let rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'))
+          if (!rearCamera) {
+            rearCamera = videoDevices[0]
+          }
+          console.log(rearCamera)
+
           window.webcamStream = await navigator.mediaDevices.getUserMedia({
-            video: { deviceId: { exact: deviceId } },
+            video: { deviceId: { exact: rearCamera.deviceId } },
           });
           arCamera.setFlipped(
             window.WEBCAM_SETTINGS.video.facingMode === "user"
