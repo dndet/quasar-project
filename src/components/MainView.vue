@@ -125,7 +125,7 @@ export default {
       try {
         const constraints = {
           video: {
-            facingMode: { exact: 'environment' }
+            facingMode: 'environment'
           }
         }
         const stream = await navigator.mediaDevices.getUserMedia(constraints)
@@ -217,7 +217,7 @@ export default {
     if (this.isIOS()) {
       alert('Using IOS')
     }
-    const tet = this.getRearCamera()
+    const tet = await this.getRearCamera()
     console.log(tet)
     const videoDevices = await this.getCameras()
     let rearCamera = videoDevices.find(device => device.label.toLowerCase().includes('back'))
