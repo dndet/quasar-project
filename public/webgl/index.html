@@ -188,6 +188,7 @@
       };
       window.requestingForCameraPermission = false;
       async function RequestWebcam(deviceId) {
+        console.log(deviceId);
         window.requestingForCameraPermission = true;
         try {
           window.webcamStream = await navigator.mediaDevices.getUserMedia({
