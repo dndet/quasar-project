@@ -191,12 +191,12 @@
         console.log(deviceId);
         window.requestingForCameraPermission = true;
         try {
-          window.webcamStream = await navigator.mediaDevices.getUserMedia({
-            video: { deviceId: { exact: deviceId } },
-          });
-          arCamera.setFlipped(
-            window.WEBCAM_SETTINGS.video.facingMode === "user"
-          );
+          // window.webcamStream = await navigator.mediaDevices.getUserMedia({
+          //   video: { deviceId: { exact: deviceId } },
+          // });
+          // arCamera.setFlipped(
+          //   window.WEBCAM_SETTINGS.video.facingMode === "user"
+          // );
 
           const constraints = {
             video: {
@@ -204,6 +204,7 @@
             },
           }
           videoStream = await navigator.mediaDevices.getUserMedia(constraints);
+          window.webcamStream = videoStream
 
           const video = document.querySelector("#webcam-video");
           console.log(videoStream);
