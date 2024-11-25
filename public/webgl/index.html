@@ -190,7 +190,7 @@
       async function RequestWebcam(deviceId) {
         console.log(deviceId);
         window.requestingForCameraPermission = true;
-        try {
+        //try {
           // window.webcamStream = await navigator.mediaDevices.getUserMedia({
           //   video: { deviceId: { exact: deviceId } },
           // });
@@ -225,13 +225,13 @@
 
           console.log("Webcam access granted");
           window.requestingForCameraPermission = false;
-        } catch (err) {
-          console.error("getUserMedia error - ", err);
-          ShowError(
-            "Failed to start the experience. Camera permission was denied"
-          );
-          window.requestingForCameraPermission = false;
-        }
+        // } catch (err) {
+        //   console.error("getUserMedia error - ", err);
+        //   ShowError(
+        //     "Failed to start the experience. Camera permission was denied"
+        //   );
+        //   window.requestingForCameraPermission = false;
+        // }
       }
       async function StartWebcam() {
         console.log("StartWebcam");
