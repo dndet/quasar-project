@@ -206,6 +206,7 @@
           videoStream = await navigator.mediaDevices.getUserMedia(constraints);
 
           const video = document.querySelector("#webcam-video");
+          console.log(videoStream);
           video.srcObject = videoStream;
 
           try {
